@@ -1,0 +1,10 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+/.idea
+appsettings.json
+/.vscode
+*DotSettings.user
+/HabitTracker.Api/Resources/Messages.uk.resx
