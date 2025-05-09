@@ -17,7 +17,10 @@ public class RulesCommand: ICommand
         _localizer = localizer;
     }
 
-    public string Command => Commands.Rules;
+    public bool MatchesCommand(string message)
+    {
+        return message == Commands.Rules;
+    }
 
     public async Task ExecuteAsync(HookMessage message)
     {

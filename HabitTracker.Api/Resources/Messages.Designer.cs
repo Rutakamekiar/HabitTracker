@@ -87,6 +87,24 @@ namespace HabitTracker.Api.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category already exists.
+        /// </summary>
+        internal static string CategoryAlreadyExists {
+            get {
+                return ResourceManager.GetString("CategoryAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category &apos;{0}&apos; was added.
+        /// </summary>
+        internal static string CategoryWasAdded {
+            get {
+                return ResourceManager.GetString("CategoryWasAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Counted.
         /// </summary>
         internal static string Counted {

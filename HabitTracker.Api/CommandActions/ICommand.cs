@@ -4,6 +4,6 @@ namespace HabitTracker.Api.CommandActions;
 
 public interface ICommand
 {
-    public string Command { get; }
+    public bool MatchesCommand(string message);
     Task ExecuteAsync(HookMessage message);
 }

@@ -21,7 +21,10 @@ public class CancelCommand: ICommand
         _localizer = localizer;
     }
 
-    public string Command => Commands.Cancel;
+    public bool MatchesCommand(string message)
+    {
+        return message == Commands.Cancel;
+    }
 
     public async Task ExecuteAsync(HookMessage message)
     {

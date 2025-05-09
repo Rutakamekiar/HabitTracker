@@ -34,7 +34,10 @@ public class DefaultCommand: ICommand
         _unitOfWork = unitOfWork;
     }
 
-    public string Command => Commands.Default;
+    public bool MatchesCommand(string message)
+    {
+        return message == Commands.Default;
+    }
 
     public async Task ExecuteAsync(HookMessage message)
     {

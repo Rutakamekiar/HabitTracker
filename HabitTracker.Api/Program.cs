@@ -29,6 +29,7 @@ builder.Services
     .AddScoped<ICommand, HelpCommand>()
     .AddScoped<ICommand, RulesCommand>()
     .AddScoped<ICommand, CancelCommand>()
+    .AddScoped<ICommand, AddCategoryCommand>()
     .AddScoped<CommandProcessor>();
 
 builder.Services.AddScoped<ITelegramBotClient, TelegramBotClient>(_ =>

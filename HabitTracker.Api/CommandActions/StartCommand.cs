@@ -21,7 +21,10 @@ public class StartCommand: ICommand
         _unitOfWork = unitOfWork;
     }
 
-    public string Command => Commands.Start;
+    public bool MatchesCommand(string message)
+    {
+        return message == Commands.Start;
+    }
 
     public async Task ExecuteAsync(HookMessage message)
     {

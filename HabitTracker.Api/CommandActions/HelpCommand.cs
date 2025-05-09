@@ -17,7 +17,10 @@ public class HelpCommand: ICommand
         _localizer = localizer;
     }
 
-    public string Command => Commands.Help;
+    public bool MatchesCommand(string message)
+    {
+        return message == Commands.Help;
+    }
 
     public async Task ExecuteAsync(HookMessage message)
     {

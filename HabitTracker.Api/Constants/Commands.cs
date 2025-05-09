@@ -8,4 +8,5 @@ public static class Commands
     public const string Rules = "/rules";
     public const string Cancel = "/cancel";
     public const string Redo = "/redo";
+    public const string AddCategory = @"^/add_category\s+.+$";
 }

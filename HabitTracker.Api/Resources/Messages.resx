@@ -61,4 +61,10 @@
     <data name="UnableToRespondTo" xml:space="preserve">
         <value>An error occurred while responding to {0}</value>
     </data>
+    <data name="CategoryAlreadyExists" xml:space="preserve">
+        <value>Category already exists</value>
+    </data>
+    <data name="CategoryWasAdded" xml:space="preserve">
+        <value>Category '{0}' was added</value>
+    </data>
 </root>
