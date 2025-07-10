@@ -68,4 +68,12 @@ public class BotController : ControllerBase
             text: message);
         return Ok();
     }
+
+    
+    [HttpGet]
+    [HttpHead]
+    public IActionResult Get()
+    {
+        return Ok();
+    }
 }
