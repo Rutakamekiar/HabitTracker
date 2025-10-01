@@ -1,5 +1,6 @@
 ﻿using HabitTracker.Api.Constants;
 using HabitTracker.Api.Resources;
+using HabitTracker.Api.TelegramWrappers;
 using HabitTracker.Application.Services.Records;
 using HabitTracker.Domain.Models;
 using Microsoft.Extensions.Localization;
@@ -14,10 +15,10 @@ public class CommandProcessor
     private readonly IEnumerable<ICommand> _commands;
     private readonly IStringLocalizer<Messages> _localizer;
 
-    public CommandProcessor(IEnumerable<ICommand> commands, IRecordService recordService, ITelegramBotClient telegramBotClient, IStringLocalizer<Messages> localizer)
+    public CommandProcessor(IEnumerable<ICommand> commands, IRecordService recordService, HabitTrackerTelegramClientWrapper wrapper, IStringLocalizer<Messages> localizer)
     {
         _recordService = recordService;
-        _telegramBotClient = telegramBotClient;
+        _telegramBotClient = wrapper.TelegramBotClient;
         _localizer = localizer;
         _commands = commands;
     }

@@ -1,6 +1,7 @@
 ﻿using HabitTracker.Api.Constants;
 using HabitTracker.Api.Extensions;
 using HabitTracker.Api.Resources;
+using HabitTracker.Api.TelegramWrappers;
 using HabitTracker.Application.Services.Records;
 using HabitTracker.Application.Services.TelegramUsers;
 using HabitTracker.Domain.Models;
@@ -19,14 +20,14 @@ public class DefaultCommand: ICommand
     private readonly IStringLocalizer<Messages> _localizer;
     private readonly IUnitOfWork _unitOfWork;
 
-    public DefaultCommand(ITelegramBotClient telegramBotClient,
+    public DefaultCommand(HabitTrackerTelegramClientWrapper wrapper,
                           ITelegramUserService telegramUserService,
                           IRecordService recordService,
                           ILogger<DefaultCommand> logger,
                           IStringLocalizer<Messages> localizer,
                           IUnitOfWork unitOfWork)
     {
-        _telegramBotClient = telegramBotClient;
+        _telegramBotClient = wrapper.TelegramBotClient;
         _telegramUserService = telegramUserService;
         _recordService = recordService;
         _logger = logger;

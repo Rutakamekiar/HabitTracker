@@ -1,6 +1,7 @@
 ﻿using HabitTracker.Api.Constants;
 using HabitTracker.Api.Extensions;
 using HabitTracker.Api.Resources;
+using HabitTracker.Api.TelegramWrappers;
 using HabitTracker.Application.Services.Records;
 using HabitTracker.Domain.Models;
 using Microsoft.Extensions.Localization;
@@ -14,9 +15,9 @@ public class CancelCommand: ICommand
     private readonly IRecordService _recordService;
     private readonly IStringLocalizer<Messages> _localizer;
 
-    public CancelCommand(ITelegramBotClient telegramBotClient, IRecordService recordService, IStringLocalizer<Messages> localizer)
+    public CancelCommand(HabitTrackerTelegramClientWrapper wrapper, IRecordService recordService, IStringLocalizer<Messages> localizer)
     {
-        _telegramBotClient = telegramBotClient;
+        _telegramBotClient = wrapper.TelegramBotClient;
         _recordService = recordService;
         _localizer = localizer;
     }

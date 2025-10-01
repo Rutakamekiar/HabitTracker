@@ -1,5 +1,6 @@
 ﻿using HabitTracker.Api.Constants;
 using HabitTracker.Api.Resources;
+using HabitTracker.Api.TelegramWrappers;
 using HabitTracker.Domain.Models;
 using HabitTracker.Infrastructure.UnitOfWork;
 using Microsoft.Extensions.Localization;
@@ -14,9 +15,9 @@ public class StartCommand: ICommand
     private readonly IStringLocalizer<Messages> _localizer;
     private readonly IUnitOfWork _unitOfWork;
 
-    public StartCommand(ITelegramBotClient telegramBotClient, IStringLocalizer<Messages> localizer, IUnitOfWork unitOfWork)
+    public StartCommand(HabitTrackerTelegramClientWrapper wrapper, IStringLocalizer<Messages> localizer, IUnitOfWork unitOfWork)
     {
-        _telegramBotClient = telegramBotClient;
+        _telegramBotClient = wrapper.TelegramBotClient;
         _localizer = localizer;
         _unitOfWork = unitOfWork;
     }

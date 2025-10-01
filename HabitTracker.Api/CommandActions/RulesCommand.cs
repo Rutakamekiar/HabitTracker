@@ -1,5 +1,6 @@
 ﻿using HabitTracker.Api.Constants;
 using HabitTracker.Api.Resources;
+using HabitTracker.Api.TelegramWrappers;
 using HabitTracker.Domain.Models;
 using Microsoft.Extensions.Localization;
 using Telegram.Bot;
@@ -11,9 +12,9 @@ public class RulesCommand: ICommand
     private readonly ITelegramBotClient _telegramBotClient;
     private readonly IStringLocalizer<Messages> _localizer;
 
-    public RulesCommand(ITelegramBotClient telegramBotClient, IStringLocalizer<Messages> localizer)
+    public RulesCommand(HabitTrackerTelegramClientWrapper wrapper, IStringLocalizer<Messages> localizer)
     {
-        _telegramBotClient = telegramBotClient;
+        _telegramBotClient = wrapper.TelegramBotClient;
         _localizer = localizer;
     }
 

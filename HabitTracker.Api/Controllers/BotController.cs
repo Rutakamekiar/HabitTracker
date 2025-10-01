@@ -1,5 +1,6 @@
 using HabitTracker.Api.CommandActions;
 using HabitTracker.Api.Resources;
+using HabitTracker.Api.TelegramWrappers;
 using HabitTracker.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -18,10 +19,10 @@ public class BotController : ControllerBase
     private readonly ILogger<BotController> _logger;
     private readonly IStringLocalizer<Messages> _localizer;
 
-    public BotController(CommandProcessor commandProcessor, ITelegramBotClient telegramBotClient, ILogger<BotController> logger, IStringLocalizer<Messages> localizer)
+    public BotController(CommandProcessor commandProcessor, HabitTrackerTelegramClientWrapper habitTrackerTelegramClientWrapper, ILogger<BotController> logger, IStringLocalizer<Messages> localizer)
     {
         _commandProcessor = commandProcessor;
-        _telegramBotClient = telegramBotClient;
+        _telegramBotClient = habitTrackerTelegramClientWrapper.TelegramBotClient;
         _logger = logger;
         _localizer = localizer;
     }

@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using HabitTracker.Api.Constants;
 using HabitTracker.Api.Resources;
+using HabitTracker.Api.TelegramWrappers;
 using HabitTracker.Domain.Models;
 using HabitTracker.Infrastructure.Entities;
 using HabitTracker.Infrastructure.UnitOfWork;
@@ -16,9 +17,9 @@ public class AddCategoryCommand: ICommand
     private readonly IStringLocalizer<Messages> _localizer;
     private readonly IUnitOfWork _unitOfWork;
 
-    public AddCategoryCommand(ITelegramBotClient telegramBotClient, IStringLocalizer<Messages> localizer, IUnitOfWork unitOfWork)
+    public AddCategoryCommand(HabitTrackerTelegramClientWrapper habitTrackerTelegramClientWrapper, IStringLocalizer<Messages> localizer, IUnitOfWork unitOfWork)
     {
-        _telegramBotClient = telegramBotClient;
+        _telegramBotClient = habitTrackerTelegramClientWrapper.TelegramBotClient;
         _localizer = localizer;
         _unitOfWork = unitOfWork;
     }

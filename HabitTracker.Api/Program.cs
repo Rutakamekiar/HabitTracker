@@ -2,6 +2,7 @@ using System.Globalization;
 using HabitTracker.Api.CommandActions;
 using HabitTracker.Api.Constants;
 using HabitTracker.Api.Controllers;
+using HabitTracker.Api.TelegramWrappers;
 using HabitTracker.Application.Services.Records;
 using HabitTracker.Application.Services.TelegramUsers;
 using HabitTracker.Infrastructure;
@@ -32,9 +33,19 @@ builder.Services
     .AddScoped<ICommand, AddCategoryCommand>()
     .AddScoped<CommandProcessor>();
 
-builder.Services.AddScoped<ITelegramBotClient, TelegramBotClient>(_ =>
-    new TelegramBotClient(builder.Configuration["TelegramToken"] ?? throw new ArgumentException("Telegram token is not set")));
+builder.Services.AddScoped<HabitTrackerTelegramClientWrapper>(_ =>
+{
+    var token = builder.Configuration["TelegramToken"] ?? throw new ArgumentException("Telegram token is not set");
+    var telegramBotClient = new TelegramBotClient(token);
+    return new HabitTrackerTelegramClientWrapper(telegramBotClient);
+});
 
+builder.Services.AddScoped<ZvychajnaTelegramClientWrapper>(_ =>
+{
+    var token = builder.Configuration["ZvychajnaTelegramToken"] ?? throw new ArgumentException("Telegram token is not set");
+    var telegramBotClient = new TelegramBotClient(token);
+    return new ZvychajnaTelegramClientWrapper(telegramBotClient);
+});
 
 builder.Services.AddControllers().AddNewtonsoftJson();
 
