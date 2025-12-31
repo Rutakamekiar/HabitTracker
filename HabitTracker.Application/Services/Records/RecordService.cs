@@ -40,14 +40,20 @@ public class RecordService : IRecordService
 
     public async Task<List<StatisticResult>> GetStatisticsByChatIdAsync(string chatId)
     {
-        var currentYear = DateTime.Now.Year;
-        DateTime startOfYear = DateTime.SpecifyKind(new DateTime(currentYear, 1, 1).AddHours(-2), DateTimeKind.Utc);
-        DateTime startOfNextYear = DateTime.SpecifyKind(new DateTime(currentYear+1, 1, 1).AddHours(-2), DateTimeKind.Utc);
+        var kyivTz = TimeZoneInfo.FindSystemTimeZoneById("Europe/Kyiv");
+        var kyivNow = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, kyivTz);
+        var year = kyivNow.Year;
 
+        var kyivStart = new DateTime(year, 1, 1, 0, 0, 0, DateTimeKind.Unspecified);
+        var kyivNext = new DateTime(year + 1, 1, 1, 0, 0, 0, DateTimeKind.Unspecified);
+
+        var startUtc = TimeZoneInfo.ConvertTimeToUtc(kyivStart, kyivTz);
+        var nextUtc = TimeZoneInfo.ConvertTimeToUtc(kyivNext, kyivTz);
+        
         var records = await _unitOfWork.Records.GetAsync(x => 
             x.ChatId == chatId 
-         && x.CreationDate >= startOfYear 
-         && x.CreationDate < startOfNextYear,
+         && x.CreationDate >= startUtc 
+         && x.CreationDate < nextUtc,
             [x => x.TelegramUser, x => x.Category]);
         var result = records
                      .GroupBy(x => new { x.TelegramUserId, x.TelegramUser.Username })
