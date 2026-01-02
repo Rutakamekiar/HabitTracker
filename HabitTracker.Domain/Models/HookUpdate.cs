@@ -50,21 +50,23 @@ public class HookMessage
     {
         if (!string.IsNullOrEmpty(Sticker?.Emoji))
         {
-            return Sticker.Emoji;
+            return NormalizeEmoji(Sticker.Emoji);
         }
         
         if (!string.IsNullOrEmpty(Dice?.Emoji))
         {
-            return Dice.Emoji;
+            return NormalizeEmoji(Dice.Emoji);
         }
         
         if (!string.IsNullOrEmpty(Text))
         {
-            return Text;
+            return NormalizeEmoji(Text);
         }
 
         return string.Empty;
     }
+    
+    private string NormalizeEmoji(string s) => s.Replace("\uFE0F", string.Empty).Trim();
 }
 
 public class HookChat
