@@ -22,6 +22,7 @@ public class HookMessage
     public string? Text { private get; set; }
     
     public HookSticker? Sticker { private get; set; }
+    public HookDice? Dice { private get; set; }
     
     [JsonProperty(PropertyName = "reply_to_message")]
     public HookMessage? ReplyToMessage { get; set; }
@@ -52,6 +53,11 @@ public class HookMessage
             return Sticker.Emoji;
         }
         
+        if (!string.IsNullOrEmpty(Dice?.Emoji))
+        {
+            return Dice.Emoji;
+        }
+        
         if (!string.IsNullOrEmpty(Text))
         {
             return Text;
@@ -76,6 +82,12 @@ public class HookFrom
 }
 
 public class HookSticker
+{
+    [JsonProperty(PropertyName = "emoji")]
+    public string Emoji { get; set; } = string.Empty;
+}
+
+public class HookDice
 {
     [JsonProperty(PropertyName = "emoji")]
     public string Emoji { get; set; } = string.Empty;
