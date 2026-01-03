@@ -65,8 +65,11 @@ public class HookMessage
 
         return string.Empty;
     }
-    
-    private string NormalizeEmoji(string s) => s.Replace("\uFE0F", string.Empty).Trim();
+
+    private string NormalizeEmoji(string s) =>
+        s.Replace("\uFE0F", "")
+            .Replace("\u200D", "")
+            .Trim();
 }
 
 public class HookChat
@@ -79,8 +82,10 @@ public class HookFrom
     [JsonProperty(Required = Required.Always, PropertyName = "id")]
     public long Id { get; set; }
 
-    [JsonProperty(Required = Required.Always, PropertyName = "username")]
-    public string Username { get; set; } = default!;
+    [JsonProperty(PropertyName = "username")]
+    public string? Username { get; set; } = default!;
+    
+    public string GetUsername() => Username ?? Id.ToString();
 }
 
 public class HookSticker

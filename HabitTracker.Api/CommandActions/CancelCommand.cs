@@ -47,7 +47,7 @@ public class CancelCommand: ICommand
         if (record.UserId != message.From?.Id.ToString())
         {
             await _telegramBotClient.SendTextMessageAsync(message.Chat!.Id,
-                _localizer["UnauthorizedAccess", message.From!.Username]);
+                _localizer["UnauthorizedAccess", message.From!.GetUsername()]);
             return;
         }
         

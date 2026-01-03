@@ -18,7 +18,7 @@ public class TelegramUserService : ITelegramUserService
         var result = await _unitOfWork.TelegramUsers.CreateOrUpdateAsync(new TelegramUserEntity
         {
             Id = from.Id.ToString(),
-            Username = from.Username,
+            Username = from.GetUsername(),
         }).ContinueWith(x => x.Result.ToModel());
         await _unitOfWork.CompleteAsync();
         return result;
